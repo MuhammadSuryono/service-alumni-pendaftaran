@@ -14,5 +14,16 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    $data = [
+        "status" => true,
+        "message" => env('APP_NAME'),
+        "version" => "v1.0.0",
+    ];
+
+    return response()->json($data, 200);
 });
+
+$router->get('/tahun-angkatan', 'Alumni\AlumniAngkatanController@GetSemuaAngakatan');
+$router->post('/tahun-angkatan/store', 'Alumni\AlumniAngkatanController@StoreTahunAngkatan');
+$router->put('/tahun-angkatan/update/:id', 'Alumni\AlumniAngkatanController@UpdateTahunAngkatan');
+$router->delete('/tahun-angkatan/delete/:id', 'Alumni\AlumniAngkatanController@DeleteTahunAngkatan');
